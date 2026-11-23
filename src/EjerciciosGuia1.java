@@ -1,27 +1,31 @@
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class EjerciciosGuia1 {
 
     // Integrantes: [ESCRIBIR LOS NOMBRES]
-    private static final Scanner entrada = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int opcion;
+        int opcion = -1;
 
         do {
-            System.out.println("\n=== EJERCICIOS GUÍA 1 ===");
-            System.out.println("1. Positivo, negativo o cero");
-            System.out.println("2. Par o impar");
-            System.out.println("3. Validar edad");
-            System.out.println("4. Calculadora con switch");
-            System.out.println("5. Año bisiesto");
-            System.out.println("6. Clasificar nota");
-            System.out.println("7. Mayor de tres números");
-            System.out.println("0. Salir");
-            System.out.print("Elige un ejercicio: ");
+            Integer seleccion = leerEntero(
+                    "=== EJERCICIOS GUÍA 1 ===\n"
+                            + "1. Positivo, negativo o cero\n"
+                            + "2. Par o impar\n"
+                            + "3. Validar edad\n"
+                            + "4. Calculadora con switch\n"
+                            + "5. Año bisiesto\n"
+                            + "6. Clasificar nota\n"
+                            + "7. Mayor de tres números\n"
+                            + "0. Salir\n\n"
+                            + "Elige un ejercicio:");
 
-            opcion = leerEntero();
+            if (seleccion == null) {
+                opcion = 0;
+                break;
+            }
 
+            opcion = seleccion;
             switch (opcion) {
                 case 1:
                     ejercicio1();
@@ -45,173 +49,239 @@ public class EjerciciosGuia1 {
                     ejercicio7();
                     break;
                 case 0:
-                    System.out.println("Programa finalizado.");
+                    JOptionPane.showMessageDialog(
+                            null, "Programa finalizado.", "Salida",
+                            JOptionPane.INFORMATION_MESSAGE);
                     break;
                 default:
-                    System.out.println("Opción no válida.");
+                    mostrarError("Opción no válida.");
             }
         } while (opcion != 0);
-
-        entrada.close();
     }
 
-    // Ejercicio 1: determinar si el número es positivo, negativo o cero.
+    // Determina si el número es positivo, negativo o cero.
     private static void ejercicio1() {
-        System.out.print("Ingresa un número entero: ");
-        int numero = leerEntero();
+        Integer numero = leerEntero("Ingresa un número entero:");
+        if (numero == null) {
+            return;
+        }
 
         if (numero > 0) {
-            System.out.println("El número es positivo.");
+            mostrarResultado("El número es positivo.");
         } else if (numero < 0) {
-            System.out.println("El número es negativo.");
+            mostrarResultado("El número es negativo.");
         } else {
-            System.out.println("El número es cero.");
+            mostrarResultado("El número es cero.");
         }
     }
 
-    // Ejercicio 2: determinar si el número es par o impar.
+    // Determina si el número es par o impar.
     private static void ejercicio2() {
-        System.out.print("Ingresa un número entero: ");
-        int numero = leerEntero();
+        Integer numero = leerEntero("Ingresa un número entero:");
+        if (numero == null) {
+            return;
+        }
 
         if (numero % 2 == 0) {
-            System.out.println("El número es par.");
+            mostrarResultado("El número es par.");
         } else {
-            System.out.println("El número es impar.");
+            mostrarResultado("El número es impar.");
         }
     }
 
-    // Ejercicio 3: validar la edad.
+    // Valida la edad para determinar si puede ingresar.
     private static void ejercicio3() {
-        System.out.print("Ingresa tu edad: ");
-        int edad = leerEntero();
+        Integer edad = leerEntero("Ingresa tu edad:");
+        if (edad == null) {
+            return;
+        }
 
         if (edad < 0) {
-            System.out.println("Edad inválida.");
+            mostrarError("Edad inválida.");
         } else if (edad >= 18) {
-            System.out.println("Puede ingresar.");
+            mostrarResultado("Puede ingresar.");
         } else {
-            System.out.println("Acceso denegado.");
+            mostrarResultado("Acceso denegado.");
         }
     }
 
-    // Ejercicio 4: calculadora usando switch.
+    // Realiza una operación aritmética usando switch.
     private static void ejercicio4() {
-        System.out.print("Ingresa el primer número: ");
-        double primero = leerDecimal();
+        Double primero = leerDecimal("Ingresa el primer número:");
+        if (primero == null) {
+            return;
+        }
 
-        System.out.print("Ingresa el segundo número: ");
-        double segundo = leerDecimal();
+        Double segundo = leerDecimal("Ingresa el segundo número:");
+        if (segundo == null) {
+            return;
+        }
 
-        System.out.print("Ingresa la operación (+, -, *, /): ");
-        String operador = entrada.nextLine().trim();
+        String operador = leerOperador();
+        if (operador == null) {
+            return;
+        }
 
         switch (operador) {
             case "+":
-                System.out.println("Resultado: " + (primero + segundo));
+                mostrarResultado("Resultado: " + (primero + segundo));
                 break;
             case "-":
-                System.out.println("Resultado: " + (primero - segundo));
+                mostrarResultado("Resultado: " + (primero - segundo));
                 break;
             case "*":
-                System.out.println("Resultado: " + (primero * segundo));
+                mostrarResultado("Resultado: " + (primero * segundo));
                 break;
             case "/":
                 if (segundo == 0) {
-                    System.out.println("Error: no se puede dividir entre cero.");
+                    mostrarError("No se puede dividir entre cero.");
                 } else {
-                    System.out.println("Resultado: " + (primero / segundo));
+                    mostrarResultado("Resultado: " + (primero / segundo));
                 }
                 break;
             default:
-                System.out.println("Operador no válido.");
+                mostrarError("Operador no válido.");
         }
     }
 
-    // Ejercicio 5: determinar si un año es bisiesto.
+    // Determina si un año es bisiesto.
     private static void ejercicio5() {
-        System.out.print("Ingresa un año: ");
-        int anio = leerEntero();
+        Integer anio = leerEntero("Ingresa un año:");
+        if (anio == null) {
+            return;
+        }
 
         if (anio <= 0) {
-            System.out.println("Ingresa un año válido.");
-        } else if ((anio % 4 == 0 && anio % 100 != 0)
-                || anio % 400 == 0) {
-            System.out.println("El año " + anio + " es bisiesto.");
+            mostrarError("Ingresa un año válido.");
+        } else if ((anio % 4 == 0 && anio % 100 != 0) || anio % 400 == 0) {
+            mostrarResultado("El año " + anio + " es bisiesto.");
         } else {
-            System.out.println("El año " + anio + " no es bisiesto.");
+            mostrarResultado("El año " + anio + " no es bisiesto.");
         }
     }
 
-    // Ejercicio 6: clasificar una nota entre 0 y 100.
+    // Clasifica una nota entre 0 y 100.
     private static void ejercicio6() {
-        System.out.print("Ingresa una nota entre 0 y 100: ");
-        int nota = leerEntero();
+        Integer nota = leerEntero("Ingresa una nota entre 0 y 100:");
+        if (nota == null) {
+            return;
+        }
 
         if (nota < 0 || nota > 100) {
-            System.out.println("Nota inválida. Debe estar entre 0 y 100.");
+            mostrarError("La nota debe estar entre 0 y 100.");
         } else if (nota >= 90) {
-            System.out.println("Excelente.");
+            mostrarResultado("Excelente.");
         } else if (nota >= 80) {
-            System.out.println("Bueno.");
+            mostrarResultado("Bueno.");
         } else if (nota >= 70) {
-            System.out.println("Aceptable.");
+            mostrarResultado("Aceptable.");
         } else if (nota >= 60) {
-            System.out.println("Insuficiente.");
+            mostrarResultado("Insuficiente.");
         } else {
-            System.out.println("Reprobado.");
+            mostrarResultado("Reprobado.");
         }
     }
 
-    // Ejercicio 7: encontrar el mayor e indicar si hay empate.
+    // Encuentra el mayor de tres números e indica si hay empate.
     private static void ejercicio7() {
-        System.out.print("Ingresa el primer número: ");
-        double primero = leerDecimal();
+        Double primero = leerDecimal("Ingresa el primer número:");
+        if (primero == null) {
+            return;
+        }
 
-        System.out.print("Ingresa el segundo número: ");
-        double segundo = leerDecimal();
+        Double segundo = leerDecimal("Ingresa el segundo número:");
+        if (segundo == null) {
+            return;
+        }
 
-        System.out.print("Ingresa el tercer número: ");
-        double tercero = leerDecimal();
+        Double tercero = leerDecimal("Ingresa el tercer número:");
+        if (tercero == null) {
+            return;
+        }
 
         double mayor = Math.max(primero, Math.max(segundo, tercero));
-
-        System.out.println("El número mayor es: " + mayor);
+        StringBuilder resultado = new StringBuilder("El número mayor es: ")
+                .append(mayor).append('\n');
 
         if (primero == segundo && segundo == tercero) {
-            System.out.println("Los tres números son iguales.");
+            resultado.append("Los tres números son iguales.");
         } else if (primero == segundo && primero == mayor) {
-            System.out.println("Hay empate entre el primero y el segundo número.");
+            resultado.append("Hay empate entre el primero y el segundo número.");
         } else if (primero == tercero && primero == mayor) {
-            System.out.println("Hay empate entre el primero y el tercer número.");
+            resultado.append("Hay empate entre el primero y el tercer número.");
         } else if (segundo == tercero && segundo == mayor) {
-            System.out.println("Hay empate entre el segundo y el tercer número.");
+            resultado.append("Hay empate entre el segundo y el tercer número.");
         } else {
-            System.out.println("No hay empate por el número mayor.");
+            resultado.append("No hay empate por el número mayor.");
+        }
+
+        mostrarResultado(resultado.toString());
+    }
+
+    // Repite la solicitud hasta recibir un entero válido o cancelar.
+    private static Integer leerEntero(String mensaje) {
+        while (true) {
+            String entrada = JOptionPane.showInputDialog(
+                    null, mensaje, "Ejercicios Guía 1", JOptionPane.QUESTION_MESSAGE);
+            if (entrada == null) {
+                return null;
+            }
+
+            try {
+                return Integer.parseInt(entrada.trim());
+            } catch (NumberFormatException e) {
+                mostrarError("Dato inválido. Ingresa un número entero.");
+            }
         }
     }
 
-    // Lee un número entero desde la consola.
-    private static int leerEntero() {
-        while (!entrada.hasNextInt()) {
-            System.out.print("Dato inválido. Ingresa un número entero: ");
-            entrada.nextLine();
-        }
+    // Repite la solicitud hasta recibir un decimal finito válido o cancelar.
+    private static Double leerDecimal(String mensaje) {
+        while (true) {
+            String entrada = JOptionPane.showInputDialog(
+                    null, mensaje, "Ejercicios Guía 1", JOptionPane.QUESTION_MESSAGE);
+            if (entrada == null) {
+                return null;
+            }
 
-        int numero = entrada.nextInt();
-        entrada.nextLine(); // Consume el salto de línea pendiente.
-        return numero;
+            try {
+                double numero = Double.parseDouble(entrada.trim());
+                if (Double.isFinite(numero)) {
+                    return numero;
+                }
+            } catch (NumberFormatException e) {
+                // El mensaje de error se muestra al final del ciclo.
+            }
+            mostrarError("Dato inválido. Ingresa un número válido.");
+        }
     }
 
-    // Lee un número decimal desde la consola.
-    private static double leerDecimal() {
-        while (!entrada.hasNextDouble()) {
-            System.out.print("Dato inválido. Ingresa un número: ");
-            entrada.nextLine();
-        }
+    // Solicita una de las operaciones admitidas por la calculadora.
+    private static String leerOperador() {
+        while (true) {
+            String operador = JOptionPane.showInputDialog(
+                    null, "Ingresa la operación (+, -, *, /):",
+                    "Calculadora", JOptionPane.QUESTION_MESSAGE);
+            if (operador == null) {
+                return null;
+            }
 
-        double numero = entrada.nextDouble();
-        entrada.nextLine(); // Consume el salto de línea pendiente.
-        return numero;
+            operador = operador.trim();
+            if (operador.equals("+") || operador.equals("-")
+                    || operador.equals("*") || operador.equals("/")) {
+                return operador;
+            }
+            mostrarError("Operador no válido. Usa +, -, * o /.");
+        }
+    }
+
+    private static void mostrarResultado(String mensaje) {
+        JOptionPane.showMessageDialog(
+                null, mensaje, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private static void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(
+                null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
 }

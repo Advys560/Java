@@ -1,4 +1,4 @@
-package ejercicios_15_al_21.src;
+package ejercicios_15_al_21;
 
 public class Suma1Al100 {
     public static void main(String[] args) {
