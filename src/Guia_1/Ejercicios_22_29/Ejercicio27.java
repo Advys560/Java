@@ -1,16 +1,16 @@
 package Guia_1.Ejercicios_22_29;
 
+import javax.swing.JOptionPane;
+
 public class Ejercicio27 {
     public static void main(String[] args) {
+        StringBuilder resultado = new StringBuilder();
         for (int fila = 0; fila < 6; fila++) {
-            
-            // Imprime seis símbolos en la misma línea.
             for (int col = 0; col < 6; col++) {
-                System.out.print("# ");
+                resultado.append("# ");
             }
-            
-            // Salta de línea al terminar las seis columnas de la fila.
-            System.out.println();
+            resultado.append('\n');
         }
+        JOptionPane.showMessageDialog(null, resultado.toString());
     }
 }

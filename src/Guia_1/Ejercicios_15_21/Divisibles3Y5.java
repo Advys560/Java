@@ -1,12 +1,16 @@
 package Guia_1.Ejercicios_15_21;
 
+import javax.swing.JOptionPane;
+
 public class Divisibles3Y5 {
     public static void main(String[] args) {
-        System.out.println("Números del 1 al 100 divisibles entre 3 y 5 simultáneamente:");
+        StringBuilder resultado = new StringBuilder(
+                "Números del 1 al 100 divisibles entre 3 y 5 simultáneamente:\n");
         for (int i = 1; i <= 100; i++) {
             if (i % 3 == 0 && i % 5 == 0) {
-                System.out.println(i);
+                resultado.append(i).append('\n');
             }
         }
+        JOptionPane.showMessageDialog(null, resultado.toString());
     }
 }

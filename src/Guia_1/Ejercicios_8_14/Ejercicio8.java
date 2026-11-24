@@ -1,12 +1,11 @@
 package Guia_1.Ejercicios_8_14;
-import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 public class Ejercicio8 {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Ingrese el valor de la compra: ");
-        double compra = sc.nextDouble();
+        double compra = Double.parseDouble(
+                JOptionPane.showInputDialog(null, "Ingrese el valor de la compra:"));
 
         double porcentajeDescuento = 0;
 
@@ -21,12 +20,11 @@ public class Ejercicio8 {
         double descuento = compra * porcentajeDescuento;
         double total = compra - descuento;
 
-        System.out.println("\n--- RESUMEN DE LA COMPRA ---");
-        System.out.println("Valor original: $" + compra);
-        System.out.println("Descuento aplicado: $" + descuento);
-        System.out.println("Porcentaje de descuento: " + (porcentajeDescuento * 100) + "%");
-        System.out.println("Total a pagar: $" + total);
-
-        sc.close();
+        JOptionPane.showMessageDialog(null,
+                "--- RESUMEN DE LA COMPRA ---\n"
+                        + "Valor original: $" + compra + "\n"
+                        + "Descuento aplicado: $" + descuento + "\n"
+                        + "Porcentaje de descuento: " + (porcentajeDescuento * 100) + "%\n"
+                        + "Total a pagar: $" + total);
     }
 }

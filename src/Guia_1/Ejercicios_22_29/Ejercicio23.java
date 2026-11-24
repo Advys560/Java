@@ -1,5 +1,7 @@
 package Guia_1.Ejercicios_22_29;
 
+import javax.swing.JOptionPane;
+
 public class Ejercicio23 {
     public static void main(String[] args) {
         int[] numeros = {1, 2, 3, 4, 5};
@@ -9,6 +11,6 @@ public class Ejercicio23 {
             suma += numeros[i];
         }
 
-        System.out.println("Suma: " + suma);
+        JOptionPane.showMessageDialog(null, "Suma: " + suma);
     }
 }

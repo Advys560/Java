@@ -1,10 +1,13 @@
 package Guia_1.Ejercicios_15_21;
 
+import javax.swing.JOptionPane;
+
 public class TablaDel7 {
     public static void main(String[] args) {
-        System.out.println("Tabla de multiplicar del 7:");
+        StringBuilder resultado = new StringBuilder("Tabla de multiplicar del 7:\n");
         for (int i = 1; i <= 10; i++) {
-            System.out.println("7 x " + i + " = " + (7 * i));
+            resultado.append("7 x ").append(i).append(" = ").append(7 * i).append('\n');
         }
+        JOptionPane.showMessageDialog(null, resultado.toString());
     }
 }

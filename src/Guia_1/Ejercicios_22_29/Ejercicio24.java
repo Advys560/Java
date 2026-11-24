@@ -1,5 +1,7 @@
 package Guia_1.Ejercicios_22_29;
 
+import javax.swing.JOptionPane;
+
 public class Ejercicio24 {
     public static void main(String[] args) {
         int[] numeros = { 1, 2, 3, 4, 5, 6, 7 };
@@ -11,6 +13,6 @@ public class Ejercicio24 {
             }
         }
 
-        System.out.println("El mayor es: " + mayor);
+        JOptionPane.showMessageDialog(null, "El mayor es: " + mayor);
     }
 }

@@ -1,5 +1,7 @@
 package Guia_1.Ejercicios_15_21;
 
+import javax.swing.JOptionPane;
+
 public class Factorial {
     public static void main(String[] args) {
         int numero = 5; // Puedes cambiar este valor para calcular el factorial de otro número
@@ -9,6 +11,6 @@ public class Factorial {
             factorial *= i;
         }
         
-        System.out.println("El factorial de " + numero + " es: " + factorial);
+        JOptionPane.showMessageDialog(null, "El factorial de " + numero + " es: " + factorial);
     }
 }

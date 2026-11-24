@@ -1,5 +1,7 @@
 package Guia_1.Ejercicios_15_21;
 
+import javax.swing.JOptionPane;
+
 public class Suma1Al100 {
     public static void main(String[] args) {
         int suma = 0;
@@ -8,6 +10,6 @@ public class Suma1Al100 {
             suma += i;
         }
         
-        System.out.println("La suma de los números del 1 al 100 es: " + suma);
+        JOptionPane.showMessageDialog(null, "La suma de los números del 1 al 100 es: " + suma);
     }
 }
